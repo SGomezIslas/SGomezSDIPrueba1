@@ -1,0 +1,44 @@
+﻿@model ML.Usuario
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Ingrese sus datos</h1>
+<div class="container">
+    @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.IdUsuario)
+        <div class="row pb-md-3">
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Apellido Paterno" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @placeholder = "Apellido Materno" })
+            </div>
+        </div>
+        <div class="row pb-md-3">
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Edad, new { @class = "form-control", @placeholder = "Edad" })
+            </div>
+        </div>
+        <div class="row pb-md-3">
+            @if (Model.IdUsuario == 0)
+            {
+                <button class="btn btn-outline-success col-md-6 rounded-pill" type="submit">
+                    Agregar
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-outline-primary col-md-6" type="submit">
+                    Actualizar
+                </button>
+            }
+            <a class="btn btn-outline-warning col-md-6 rounded-pill" href="@Url.Action("GetAll", "Usuario")">Cancelar</a>
+        </div>
+    }
+</div>
